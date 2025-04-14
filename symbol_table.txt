@@ -1,0 +1,8 @@
+Symbol Table:
+----------------------------------------
+Name           Type      Scope     
+----------------------------------------
+n1             int       local     
+n2             int       local     
+i              int       local     
+gcd            int       local     

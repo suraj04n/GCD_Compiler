@@ -1,0 +1,18 @@
+Token Summary:
+----------------------------------------
+Token Type          Count     
+----------------------------------------
+INT_TYPE            2         
+ID                  16        
+LPAREN              3         
+RPAREN              3         
+BEGIN               2         
+COMMA               3         
+SEMICOLON           5         
+IF                  1         
+ASSIGN              3         
+FOR                 1         
+INT_CONST           2         
+INC                 1         
+END                 2         
+EOF                 1         

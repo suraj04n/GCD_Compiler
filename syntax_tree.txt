@@ -1,0 +1,16 @@
+Program
+  MainFunction
+    Identifier(main)
+    Block
+      VariableDeclaration
+        Type(int)
+        VariableList
+          Identifier(n1)
+          Identifier(n2)
+          Identifier(i)
+          Identifier(gcd)
+      IfStatement
+        Condition
+        Assignment
+          Identifier(expr)
+          Identifier(relop)

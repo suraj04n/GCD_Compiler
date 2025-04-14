@@ -1,0 +1,16 @@
+Tokens Used:
+----------------------------------------
+ASSIGN
+BEGIN
+COMMA
+END
+EOF
+FOR
+ID
+IF
+INC
+INT_CONST
+INT_TYPE
+LPAREN
+RPAREN
+SEMICOLON

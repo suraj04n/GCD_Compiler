@@ -1,0 +1,13 @@
+FIRST Sets:
+FIRST(ForBody) = {ID}
+FIRST(IfStatement) = {IF}
+FIRST(Block) = {INT_TYPE}
+FIRST(VariableList) = {ID}
+FIRST(Condition) = {EXPR}
+FIRST(ForLoop) = {FOR}
+FIRST(Initialization) = {ID}
+FIRST(Increment) = {ID, INC}
+FIRST(Assignment) = {ID}
+FIRST(MainFunction) = {INT_TYPE}
+FIRST(Program) = {INT_TYPE}
+FIRST(VariableDeclaration) = {INT_TYPE}
