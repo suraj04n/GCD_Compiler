@@ -25,6 +25,15 @@
       </VariableDeclaration>
       <IfStatement>
         <Condition>
+          <Expression>
+            expr
+          </Expression>
+          <RelationalOperator>
+            expr
+          </RelationalOperator>
+          <Expression>
+            expr
+          </Expression>
         </Condition>
         <Assignment>
           <Identifier>

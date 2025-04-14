@@ -11,6 +11,9 @@ Program
           Identifier(gcd)
       IfStatement
         Condition
+          Expression(expr)
+          RelationalOperator(expr)
+          Expression(expr)
         Assignment
           Identifier(expr)
           Identifier(relop)

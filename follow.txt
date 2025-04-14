@@ -1,13 +1,13 @@
 FOLLOW Sets:
+FOLLOW(MainFunction) = {$}
+FOLLOW(Condition) = {RPAREN, SEMICOLON}
+FOLLOW(VariableDeclaration) = {IF}
+FOLLOW(Initialization) = {SEMICOLON}
+FOLLOW(ForLoop) = {END}
+FOLLOW(Increment) = {RPAREN}
 FOLLOW(ForBody) = {END}
 FOLLOW(IfStatement) = {FOR}
-FOLLOW(Block) = {END}
-FOLLOW(VariableList) = {SEMICOLON}
-FOLLOW(Condition) = {RPAREN, SEMICOLON}
-FOLLOW(ForLoop) = {END}
-FOLLOW(Initialization) = {SEMICOLON}
-FOLLOW(Increment) = {RPAREN}
-FOLLOW(Assignment) = {END, FOR}
-FOLLOW(MainFunction) = {$}
 FOLLOW(Program) = {$}
-FOLLOW(VariableDeclaration) = {END, IF}
+FOLLOW(Block) = {END}
+FOLLOW(Assignment) = {END, FOR}
+FOLLOW(VariableList) = {SEMICOLON}
