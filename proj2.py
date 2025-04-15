@@ -346,12 +346,14 @@ class CFG:
             'ForBody': ['Assignment'],
         }
         self.terminals = {'INT_TYPE', 'ID', 'LPAREN', 'RPAREN', 'BEGIN', 'END', 'SEMICOLON', 
-                         'COMMA', 'IF', 'EXPR', 'RELOP', 'ASSIGN', 'INT_CONST', 'FOR', 'INC'}
+                         'COMMA', 'IF', 'EXPR', 'RELOP', 'ASSIGN', 'INT_CONST', 'FOR', 'INC', '$'}
         self.non_terminals = set(self.productions.keys())
         self.first = {}
         self.follow = {}
+        self.parse_table = {}
         self.compute_first()
         self.compute_follow()
+        self.construct_parse_table()
 
     def compute_first(self):
         # Initialize FIRST sets
@@ -462,6 +464,29 @@ class CFG:
         
         return result
 
+    def construct_parse_table(self):
+        # Initialize the parse table with empty cells
+        for nt in self.non_terminals:
+            self.parse_table[nt] = {}
+            for t in self.terminals:
+                self.parse_table[nt][t] = []
+        
+        # Fill the parse table
+        for nt, productions in self.productions.items():
+            for prod_idx, production in enumerate(productions):
+                # Get a name for this production
+                prod_name = f"{nt} -> {production}"
+                
+                # For each terminal in FIRST(production)
+                first_of_prod = self.get_first_of_sequence(production.split())
+                for terminal in first_of_prod - {'epsilon'}:
+                    self.parse_table[nt][terminal].append(prod_name)
+                
+                # If epsilon is in FIRST(production), add production to FOLLOW(nt) entries
+                if 'epsilon' in first_of_prod:
+                    for terminal in self.follow[nt]:
+                        self.parse_table[nt][terminal].append(prod_name)
+
 def print_syntax_tree(node, level=0):
     indent = "  " * level
     node_str = f"{indent}{node}"
@@ -486,6 +511,30 @@ def print_parse_tree(node, level=0):
         result += print_parse_tree(child, level + 1)
     
     result += f"{indent}</{node.type}>\n"
+    return result
+
+def print_parse_table(cfg):
+    # Determine column widths
+    terminal_width = max(len(t) for t in cfg.terminals) + 2
+    production_width = max(len(f"{nt} -> {prod}") for nt, prods in cfg.productions.items() for prod in prods) + 2
+    
+    # Create header
+    result = "LL(1) Parse Table:\n\n"
+    result += " " * terminal_width + "| "
+    for terminal in sorted(cfg.terminals):
+        result += f"{terminal:{terminal_width}}| "
+    result += "\n"
+    result += "-" * (terminal_width + 1 + (terminal_width + 2) * len(cfg.terminals)) + "\n"
+    
+    # Create rows
+    for nt in sorted(cfg.non_terminals):
+        result += f"{nt:{terminal_width}}| "
+        for terminal in sorted(cfg.terminals):
+            cell = cfg.parse_table[nt].get(terminal, [])
+            cell_content = ", ".join(cell) if cell else ""
+            result += f"{cell_content:{terminal_width}}| "
+        result += "\n"
+    
     return result
 
 def main():
@@ -537,6 +586,10 @@ def main():
         f.write("Tokens Used:\n" + "-" * 40 + "\n")
         for token_type in sorted(set(token.type for token in tokens)):
             f.write(f"{token_type}\n")
+    
+    # Generate parse table
+    with open("parse_table.txt", "w") as f:
+        f.write(print_parse_table(cfg))
 
 if __name__ == "__main__":
     main()
